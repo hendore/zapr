@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Styled from "styled-components";
 import { Link } from "react-router-dom";
 import { nip19 } from "nostr-tools";
-import { getPrivateKey, savePrivateKey } from "../services/userdata";
+import { savePrivateKey } from "../services/userdata";
 
 export default function SetupPrivateKey(props) {
   const [privateKeyText, setPrivateKeyText] = useState("");
@@ -74,9 +74,9 @@ function SetupComplete(props) {
       <h3 style={{ fontSize: "0.9em" }}>What is a ZaprLink</h3>
       <p>
         ZaprLinks are just like any other url you are likely used to seeing. The
-        link looks something like 'http://zapr.hendore.com/#/zap?payload=....'
-        where the payload can be a bech32 encoded note identifier or even a
-        website url that points to a note such as 'https://damus.io/[noteid]'
+        link looks something like 'http://zapr.social/#/zap?payload=....' where
+        the payload can be a bech32 encoded note identifier or even a website
+        url that points to a note such as 'https://damus.io/[noteid]'
       </p>
       <p>
         Currently, when passing in a weburl as the payload only damus.io is

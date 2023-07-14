@@ -7,7 +7,7 @@ export default function Welcome(props) {
     <Container>
       <Header>
         <img src="/images/bolt.fill.svg" />
-        <span>Zapr for iOS</span>
+        <span>Zapr</span>
       </Header>
       <p>
         Since Apple started it's crackdown on native Nostr clients providing zap

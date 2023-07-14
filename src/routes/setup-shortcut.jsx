@@ -6,11 +6,6 @@ export default function SetupShortcut(props) {
   const [privateKeyText, setPrivateKeyText] = useState("");
   const profile = useProfileLoader(privateKeyText);
 
-  function handleClickNext() {
-    // check the private key is valid by getting it's pubkey
-    // if valid, store the private key and move onto step two
-  }
-
   return (
     <Container>
       <h1>Double Tap to Zap ⚡️</h1>
@@ -29,12 +24,6 @@ export default function SetupShortcut(props) {
       <NextButton to="/setup-privkey">I've done that, next!</NextButton>
     </Container>
   );
-}
-
-function useProfileLoader(privatekey) {
-  React.useEffect(() => {
-    // const pubkey =
-  }, []);
 }
 
 const Container = Styled.div`

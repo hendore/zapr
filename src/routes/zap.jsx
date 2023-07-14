@@ -44,7 +44,7 @@ function useNoteLookup(payload, relays) {
 function parsePayloadEventID(payload) {
   if (payload.startsWith("http://") || payload.startsWith("https://")) {
     const supportedSites = ["https://damus.io/", "https://snort.social/e/"];
-    for (sitePrefix in supportedSites) {
+    for (const sitePrefix in supportedSites) {
       if (payload.startsWith(sitePrefix)) {
         return payload.substr(sitePrefix.length);
       }

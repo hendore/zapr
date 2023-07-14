@@ -25,7 +25,6 @@ function useNoteLookup(payload, relays) {
       const authorFilter = [{ kinds: [0], authors: [note.pubkey], limit: 1 }];
       const authorSubscription = pool.sub(relays, authorFilter);
       authorSubscription.on("event", (author) => {
-        authorSubscription.unsub();
         const profile = JSON.parse(author.content);
         setAuthor({ pubkey: author.pubkey, profile });
         console.log(profile);

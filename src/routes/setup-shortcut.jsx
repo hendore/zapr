@@ -3,9 +3,6 @@ import Styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export default function SetupShortcut(props) {
-  const [privateKeyText, setPrivateKeyText] = useState("");
-  const profile = useProfileLoader(privateKeyText);
-
   return (
     <Container>
       <h1>Double Tap to Zap ⚡️</h1>

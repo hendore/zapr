@@ -29,8 +29,7 @@ export default function Note(props) {
 }
 
 const Container = Styled.div`
-  padding: 24px;
-  backdrop-filter: blur(5px);
+  // backdrop-filter: blur(5px);
 `;
 
 const Metadata = Styled.div`

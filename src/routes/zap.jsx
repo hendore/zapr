@@ -107,9 +107,9 @@ export default function ZapEvent(props) {
     author.profile.lud06 || author.profile.lud16;
 
   return (
-    <Container layout>
+    <>
       {authorHasLightningAddress && (
-        <>
+        <ZapForm>
           <CustomAmountInput
             type="number"
             pattern="\d*"
@@ -143,19 +143,20 @@ export default function ZapEvent(props) {
               </ZapPickerOption>
             ))}
           </ZapPicker>
-
           <ZapButton onClick={handleClickSend} amount={amount} />
-        </>
+        </ZapForm>
       )}
       <NotePreviewSection>
-        <Note note={note} author={author} />
-        {!authorHasLightningAddress && (
-          <NoLightningAddress
-            name={author.profile.display_name || author.profile.name}
-          />
-        )}
+        <Container>
+          <Note note={note} author={author} />
+          {!authorHasLightningAddress && (
+            <NoLightningAddress
+              name={author.profile.display_name || author.profile.name}
+            />
+          )}
+        </Container>
       </NotePreviewSection>
-    </Container>
+    </>
   );
 }
 
@@ -192,10 +193,10 @@ function ZapButton(props) {
     <ZapButtonContainer
       whileTap={{ scale: 0.9 }}
       onClick={props.onClick}
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 0, y: visible ? 0 : 100 }}
       animate={{
         y: visible ? 0 : 100,
-        scale: visible ? 1 : 0.8,
+        // scale: visible ? 1 : 0.8,
         opacity: visible ? 1 : 0,
       }}
     >
@@ -204,9 +205,9 @@ function ZapButton(props) {
   );
 }
 
-const Container = Styled(motion.div)`
+const Container = Styled.div`
   // width: 100vw;
-  // height: 100vh;
+  // height: 100%;
   // max-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
@@ -218,17 +219,13 @@ const Container = Styled(motion.div)`
 
 const NotePreviewSection = Styled.div`
   border-top: 1px solid var(--color-background-1);
-  margin: -24px;
 `;
 
-const ZapForm = Styled.div`
-  margin-top: auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  // background-color: var(--color-background-2);
-  // border-radius: 5px 5px 0 0;
+const ZapForm = Styled(Container)`
+  background: url(/images/zapform-bg.png) repeat;
+  background-size: 500px 500px;
+
+  animation: scroll 18s linear infinite;
 `;
 
 const ZapFormContainer = Styled.div`

@@ -36,3 +36,9 @@ body {
 img {
     max-width: 100%;
 }
+
+@keyframes scroll {
+    to {
+      background-position: -500px 500px;
+    }
+  }

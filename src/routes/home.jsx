@@ -8,7 +8,7 @@ export default function Home(props) {
     if (navigator.clipboard) {
       navigator.clipboard
         .writeText(
-          "nevent1qqsfv6cgp2enam8a6mtcvny0g9yf28zvxxuad3zl0qfpd70m2cvp0ngpz4mhxue69uhhyetvv9ujuerpd46hxtnfduhs8u9s8x"
+          "note1pswgdnhxtze2r5nyfw9wr7p88f3qwfa3qh8x2gu6dplghvxf2v0s2mvh8j"
         )
         .then(() => {
           alert("note link copied to clipboard");

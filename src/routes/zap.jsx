@@ -185,7 +185,7 @@ const Container = Styled(motion.div)`
   max-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   overflow: hidden;
 }`;
 

@@ -5,11 +5,11 @@ export default function Home(props) {
   const [copied, setCopied] = React.useState(false);
 
   function handleClickCopyNoteLink() {
-    const note =
-      "nevent1qqsfv6cgp2enam8a6mtcvny0g9yf28zvxxuad3zl0qfpd70m2cvp0ngpz4mhxue69uhhyetvv9ujuerpd46hxtnfduhs8u9s8x";
     if (navigator.clipboard) {
       navigator.clipboard
-        .writeText(`https://www.zapr.social/#/zap?payload=${note}`)
+        .writeText(
+          "nevent1qqsfv6cgp2enam8a6mtcvny0g9yf28zvxxuad3zl0qfpd70m2cvp0ngpz4mhxue69uhhyetvv9ujuerpd46hxtnfduhs8u9s8x"
+        )
         .then(() => {
           alert("note link copied to clipboard");
           setCopied(true);

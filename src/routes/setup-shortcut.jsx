@@ -21,7 +21,7 @@ export default function SetupShortcut(props) {
         enable the <b>"Back Tap"</b> feature then assign the shortcut you just
         installed to either <b>"Double Tap"</b> or <b>"Tripple Tap"</b>.
       </p>
-      <SettingsImage src="/images/double-tap-settings.png" />
+      <SettingsImage src="/images/double-tap-settings.jpg" />
       <DownloadButton as="a" href="/downloads/zapr.shortcut" download="Zapr">
         <span>🚀</span>
         <span>Download Shortcut</span>

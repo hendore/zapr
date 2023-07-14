@@ -29,9 +29,7 @@ export default function Note(props) {
 }
 
 const Container = Styled.div`
-  background-color: color-mix(in srgb, var(--color-background-1) 80%, transparent);
-  border-radius: var(--corner-smoothness);
-  padding: 16px;
+  padding: 24px;
   backdrop-filter: blur(5px);
 `;
 

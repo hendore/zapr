@@ -67,7 +67,7 @@ export default function ZapEvent(props) {
   const payload = parsePayloadEventID(decodeURI(params.get("payload")));
   const { note, author } = useNoteLookup(payload, props.preferences.relays);
 
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
 
   if (!note || !author) {
     return;
@@ -108,16 +108,15 @@ export default function ZapEvent(props) {
 
   return (
     <Container layout>
-      <NotePreviewSection>
-        <Note note={note} author={author} />
-        {!authorHasLightningAddress && (
-          <NoLightningAddress
-            name={author.profile.display_name || author.profile.name}
-          />
-        )}
-      </NotePreviewSection>
       {authorHasLightningAddress && (
-        <ZapForm>
+        <>
+          <CustomAmountInput
+            type="number"
+            pattern="\d*"
+            placeholder="0 Sats"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
           <ZapPicker
             transition={{ staggerChildren: 0.03, delayChildren: 0.2 }}
             initial="initial"
@@ -144,12 +143,33 @@ export default function ZapEvent(props) {
               </ZapPickerOption>
             ))}
           </ZapPicker>
+
           <ZapButton onClick={handleClickSend} amount={amount} />
-        </ZapForm>
+        </>
       )}
+      <NotePreviewSection>
+        <Note note={note} author={author} />
+        {!authorHasLightningAddress && (
+          <NoLightningAddress
+            name={author.profile.display_name || author.profile.name}
+          />
+        )}
+      </NotePreviewSection>
     </Container>
   );
 }
+
+const CustomAmountInput = Styled.input`
+  background: var(--color-background-1);
+  border-radius: 50px;
+  border:none;
+  outline:none;
+  font-size: 2em;
+  padding: 18px 24px;
+  color: white;
+  text-align: center;
+  -webkit-appearance: none;
+`;
 
 function NoLightningAddress(props) {
   return (
@@ -179,24 +199,26 @@ function ZapButton(props) {
         opacity: visible ? 1 : 0,
       }}
     >
-      Send {shortNumber(props.amount)}
+      Zap {shortNumber(parseInt(props.amount) || 0)} Sats
     </ZapButtonContainer>
   );
 }
 
 const Container = Styled(motion.div)`
-  width: 100vw;
-  height: 100vh;
-  max-height: -webkit-fill-available;
+  // width: 100vw;
+  // height: 100vh;
+  // max-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
+  gap: 24px;
   // justify-content: center;
-  overflow: hidden;
+  // overflow: hidden;
+  padding: 24px;
 }`;
 
 const NotePreviewSection = Styled.div`
-  padding: 24px;
-  overflow: auto;
+  border-top: 1px solid var(--color-background-1);
+  margin: -24px;
 `;
 
 const ZapForm = Styled.div`
@@ -205,24 +227,12 @@ const ZapForm = Styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color: var(--color-background-2);
-  border-radius: 5px 5px 0 0;
+  // background-color: var(--color-background-2);
+  // border-radius: 5px 5px 0 0;
 `;
 
 const ZapFormContainer = Styled.div`
   padding: 0 var(--horizontal-padding);
-`;
-
-const SatsTextInput = Styled.input`
-  width: 60%;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  font-size: 3em;
-  font-weight: 900;
-  text-align: center;
-  color: white;
-  font-family: var(--font-serif);
 `;
 
 const ZapPicker = Styled(motion.div)`

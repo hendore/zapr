@@ -2,7 +2,7 @@
   "short_name": "Zapr",
   "name": "Zapr",
   "description": "Zap gun goes pew pew!",
-  "start_url": "https://zapr.herokuapp.com",
+  "start_url": "https://zapr.social",
   "background_color": "#000",
   "theme_color": "#000",
   "orientation": "portrait",

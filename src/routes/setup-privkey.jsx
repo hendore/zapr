@@ -15,7 +15,10 @@ export default function SetupPrivateKey(props) {
 
       if (type == "nsec") {
         savePrivateKey(data).then(() => {
-          setFinished(true);
+          // After reloading, the home screen should now be accessible
+          // since the user has saved their private key. The home screen
+          // has an example note the user can test their setup with
+          window.location.reload();
         });
       } else {
         throw "invalid nsec";
@@ -54,74 +57,6 @@ export default function SetupPrivateKey(props) {
         onChange={(e) => setPrivateKeyText(e.target.value)}
       />
       <FinishButton onClick={handleClickFinish}>Finish Setup</FinishButton>
-    </Container>
-  );
-}
-
-function SetupComplete(props) {
-  return (
-    <Container>
-      <h1 style={{ marginBottom: 40 }}>You are ready!</h1>
-      <p>
-        Please take a moment to read the following before closing this page, it
-        has some useful information on using Zapr and what's to come.
-      </p>
-      <h2 style={{ fontSize: "1.15em" }}>How do I zap a note?</h2>
-      <p>
-        There are two ways to Zap a Nostr event, you can either open a ZaprLink
-        from anywhere or Tap to Zap.
-      </p>
-      <h3 style={{ fontSize: "0.9em" }}>What is a ZaprLink</h3>
-      <p>
-        ZaprLinks are just like any other url you are likely used to seeing. The
-        link looks something like 'https://www.zapr.social/#/zap?payload=....'
-        where the payload can be a bech32 encoded note identifier or even a
-        website url that points to a note such as 'https://damus.io/[noteid]'
-      </p>
-      <p>
-        Currently, when passing in a weburl as the payload only damus.io is
-        currently supported but I will be releasing support for more web client
-        urls, if you have a request for a specific web client url scheme to be
-        supported just ask.
-      </p>
-      <h3 style={{ fontSize: "0.9em" }}>What about Tap to Zap?</h3>
-      <p>
-        Tap to Zap is useful for when you are using a native Nostr client on
-        your iOS device. Most of these clients have some way of copying either
-        the note identifier or a web link to that note for sharing, we can make
-        use of this feature by copying either the web link of a note or it's
-        identifier to your devices clipboard then double tapping on the back of
-        your device to trigger the shortcut you installed earlier.
-      </p>
-      <p>
-        The shortcut will extract the contents of your clipboard (the note
-        identifier or web link) and create a ZaprLink with it. This Zapr link is
-        then opened in a web view.
-      </p>
-      <h2 style={{ fontSize: "1.15em" }}>Additional info</h2>
-      <p>
-        The first time you use the Zapr shortcut, you may be asked if you would
-        like to allow the shortcut access to your clipboard or to open
-        zapr.social. I recommend to always allowing this so that the shortcut
-        doesn't ask you everytime you Tap to Zap.
-      </p>
-      <p>
-        This is still an early development release so it's currently missing a
-        couple of features that I've put towards the top of my todo list. The
-        obvious one is allowing you to edit preferences such as the wallet to
-        open after zapping (currently defaults to walletofsatoshi with no way to
-        change yet), editing the zap amount options, providing a custom one off
-        amount and specifying the comment to add to your Zap. They will be
-        implemented pretty soon but if you have any feedback please get in touch
-        🫂
-      </p>
-      <h2 style={{ fontSize: "1.15em" }}>Known issue</h2>
-      <p>
-        After zapping a note, the payment request invoice will be opened in
-        walletofsatoshi (support for other iOS wallets to be added over the next
-        few days), the webview remains open, at this point just close the
-        webview by sliding it down or tapping done to reveal your wallet.
-      </p>
     </Container>
   );
 }

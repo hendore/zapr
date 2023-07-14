@@ -15,7 +15,7 @@ export function createZapRequest({ recipient, note, sats, comment, relays }) {
       ["p", recipient],
       ["e", note],
       ["amount", (sats * 1000).toString()],
-      ["relays", ...relays],
+      ["relays", "wss://nostr.mutinywallet.com", ...relays],
       ["client", "zapr.social"],
     ],
     created_at: Math.floor(new Date() / 1000),

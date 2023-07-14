@@ -1,0 +1,20 @@
+{
+  "short_name": "Zapr",
+  "name": "Zapr",
+  "description": "Zap gun goes pew pew!",
+  "start_url": "https://zapr.herokuapp.com",
+  "background_color": "#000",
+  "theme_color": "#000",
+  "orientation": "portrait",
+  "display": "standalone",
+  "launch_handler": {
+    "client_mode": "launch-existing"
+  },
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "400x400"
+    }
+  ]
+}

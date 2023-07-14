@@ -1,0 +1,21 @@
+{
+  "name": "zlapui",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite --host"
+  },
+  "devDependencies": {
+    "vite": "^4.4.3"
+  },
+  "dependencies": {
+    "bech32": "^2.0.0",
+    "buffer": "^6.0.3",
+    "framer-motion": "^10.12.18",
+    "localforage": "^1.10.0",
+    "nostr-tools": "^1.12.1",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.1",
+    "short-number": "^1.0.7",
+    "styled-components": "^6.0.3"
+  }
+}

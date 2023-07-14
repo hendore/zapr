@@ -85,7 +85,7 @@ export default function ZapEvent(props) {
         fetchPaymentRequest(zr, author)
           .then((res) => {
             if (res.pr) {
-              window.location.href = "lightning:" + res.pr;
+              window.location.href = "walletofsaoshit:lightning:" + res.pr;
               window.close();
             } else {
               throw "Failed to fetch payment request from users lightning node.";

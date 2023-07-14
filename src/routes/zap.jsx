@@ -42,17 +42,19 @@ function useNoteLookup(payload, relays) {
 // event from the url, works ok but I can be smarter here but this will do for
 // now.
 function parsePayloadEventID(payload) {
+  const supportedSitePrefixes = [
+    "https://damus.io/",
+    "https://snort.social/e/",
+  ];
+
   if (payload.startsWith("http://") || payload.startsWith("https://")) {
-    const supportedSites = ["https://damus.io/", "https://snort.social/e/"];
-    for (const sitePrefix in supportedSites) {
-      if (payload.startsWith(sitePrefix)) {
-        return payload.substr(sitePrefix.length);
+    for (const idx in supportedSitePrefixes) {
+      if (payload.startsWith(supportedSitePrefixes[idx])) {
+        return payload.substr(supportedSitePrefixes[idx].length);
       }
     }
 
-    alert(
-      "Payload is a url I don't understand. Ping @hendore with the url to get that provider supported."
-    );
+    alert(payload + " is a url I don't understand yet.");
   }
 
   // Not a url, we have to assume its an event id we can decode and make sense of 🤞

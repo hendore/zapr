@@ -102,16 +102,18 @@ function SetupComplete(props) {
       <p>
         The first time you use the Zapr shortcut, you may be asked if you would
         like to allow the shortcut access to your clipboard or to open
-        zapr.hendore.com. I recommend to allways allowing this so that the
-        shortcut doesn't ask you everytime you Tap to Zap.
+        zapr.social. I recommend to always allowing this so that the shortcut
+        doesn't ask you everytime you Tap to Zap.
       </p>
       <p>
         This is still an early development release so it's currently missing a
         couple of features that I've put towards the top of my todo list. The
-        obvious one is allowing you to change the wallet to open after zapping,
-        editing the zap amount options and specifying a comment to add to your
-        Zap. They will be implemented pretty soon but if you have any feedback
-        please get in touch 🫂
+        obvious one is allowing you to edit preferences such as the wallet to
+        open after zapping (currently defaults to walletofsatoshi with no way to
+        change yet), editing the zap amount options, providing a custom one off
+        amount and specifying the comment to add to your Zap. They will be
+        implemented pretty soon but if you have any feedback please get in touch
+        🫂
       </p>
       <h2 style={{ fontSize: "1.15em" }}>Known issue</h2>
       <p>

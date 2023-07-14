@@ -38,17 +38,21 @@ function useNoteLookup(payload, relays) {
   return { note, author };
 }
 
+// Checks if the payload is a url, if it is then uses some simple logic to get the
+// event from the url, works ok but I can be smarter here but this will do for
+// now.
 function parsePayloadEventID(payload) {
-  // Handle urls for popular services (can keep adding url parsers in the future)
-  // Alot of this needs a tidy up but it gets the job done for now
   if (payload.startsWith("http://") || payload.startsWith("https://")) {
-    if (payload.startsWith("https://damus.io/")) {
-      return payload.substr("https://damus.io/".length);
-    } else {
-      alert(
-        "Payload is a url I don't understand. Ping @hendore with the url to get that provider supported."
-      );
+    const supportedSites = ["https://damus.io/", "https://snort.social/e/"];
+    for (site in supportedSites) {
+      if (payload.startsWith(prefix)) {
+        return payload.substr(prefix.length);
+      }
     }
+
+    alert(
+      "Payload is a url I don't understand. Ping @hendore with the url to get that provider supported."
+    );
   }
 
   // Not a url, we have to assume its an event id we can decode and make sense of 🤞

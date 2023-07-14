@@ -49,6 +49,18 @@ export default function SetupPrivateKey(props) {
         device will remove this store, if that happens don't worry, you can just
         visit Zapr again in your browser to recreate it.
       </p>
+      <Warning>
+        <p>
+          ⚠️ This is an alpha release, next week this step will no longer be
+          required and a better method to sign payment request events will be
+          implemented.
+        </p>
+        <p>
+          Source code is available at https://github.com/hendore/zapr I totally
+          understand if you dont want to trust the released build so please test
+          with a throwaway keypair until next week 🫂
+        </p>
+      </Warning>
       <PrivateKeyInput
         ref={inputRef}
         type="password"
@@ -60,6 +72,12 @@ export default function SetupPrivateKey(props) {
     </Container>
   );
 }
+
+const Warning = Styled.div`
+  border: 2px solid red;
+  padding: 8px;
+  margin-bottom: 18px;
+`;
 
 const Container = Styled.div`
     padding: 24px;

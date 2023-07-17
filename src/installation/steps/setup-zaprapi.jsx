@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Label, Subtitle, Text, TextInput } from "../../uikit";
 import localforage from "localforage";
+import { nip19 } from "nostr-tools";
 
 export default function SetupZaprAPI(props) {
   const navigate = useNavigate();
@@ -9,12 +10,22 @@ export default function SetupZaprAPI(props) {
 
   // Stores the pubkey on the users device
   function handleClickNext(props) {
-    localforage
-      .setItem("signingconf", {
-        method: "zaprapi",
-        pubkey: pubkey,
-      })
-      .then(() => navigate("../shortcut"));
+    try {
+      const { type, data } = nip19.decode(pubkey);
+      if (type != "npub") {
+        throw "Not a valid npub";
+      }
+
+      localforage
+        .setItem("signingconf", {
+          method: "zaprapi",
+          pubkey: pubkey,
+        })
+        .then(() => navigate("../shortcut"));
+    } catch (err) {
+      alert("Enter a valid npub key to continue");
+      return;
+    }
   }
 
   return (

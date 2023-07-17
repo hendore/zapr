@@ -43,7 +43,6 @@ export async function createLocallySignedZapRequest(zap) {
     const zapperPrivkey = await Storage.getUsersDecryptedPrivateKey(
       zap.passphrase
     );
-    alert(zapperPrivkey);
 
     const unsignedZapRequest = {
       kind: 9734,

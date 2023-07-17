@@ -59,6 +59,26 @@ export function saveEventSigningConfig(config) {
 }
 
 /**
+ * Returns the users preferred wallet if set, otherwise uses a default wallet.
+ *
+ * @returns Promise
+ */
+export function getPreferredWallet() {
+  return localforage.getItem("wallet").then((wallet) => {
+    return wallet || "walletofsatoshi:lightning:";
+  });
+}
+
+/**
+ * Updates the users preferred wallet to open zap payment requests in.
+ *
+ * @returns Promise
+ */
+export function savePreferredWallet(wallet) {
+  return localforage.setItem("wallet", wallet);
+}
+
+/**
  * Returns the users stored public key.
  *
  * @returns Promise

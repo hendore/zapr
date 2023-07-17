@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Styled from "styled-components";
 import ZapForm from "./components/zap-form/zap-form";
 import NotePreview from "./components/note-preview";
@@ -6,7 +7,7 @@ import PassphraseDialog from "./components/passphrase-dialog";
 import usePayloadParser from "./hooks/payload-parser";
 import { useNoteSub, useNoteAuthorSub } from "./hooks/nostr-subscriptions";
 import localforage from "localforage";
-import { getUserPreference } from "../storage";
+import { getPreferredWallet, getUserPreference } from "../storage";
 import {
   createZaprSignedZapRequest,
   createLocallySignedZapRequest,
@@ -33,7 +34,7 @@ export default function ZapEvent(props) {
 
   if (!note || !recipient) {
     // @todo, add a loading skeleton view
-    return;
+    return <p>Loading</p>;
   }
 
   async function handleSubmitZapForm() {
@@ -80,9 +81,12 @@ export default function ZapEvent(props) {
     return createAndOpenInvoice(recipient, zapAmount, zapreq);
   }
 
-  async function createAndOpenInvoice(recipient, sats, zapreq) {
-    const pr = await createPaymentRequest(recipient, sats, zapreq);
-    window.location.href = "lightning:" + pr;
+  function createAndOpenInvoice(recipient, sats, zapreq) {
+    getPreferredWallet().then((wallet) => {
+      createPaymentRequest(recipient, sats, zapreq).then((pr) => {
+        window.location.href = wallet + pr;
+      });
+    });
   }
 
   return (
@@ -94,6 +98,11 @@ export default function ZapEvent(props) {
           predefinedAmounts={preferences.amounts}
           onSubmit={handleSubmitZapForm}
         />
+        <PrefsBar>
+          <Link to="/prefs">
+            <img src="/images/gear.png" width="24" height="24" />
+          </Link>
+        </PrefsBar>
       </ZapFormSection>
       <NotePreviewSection>
         <NotePreview note={note} author={recipient} />
@@ -112,6 +121,13 @@ const Container = Styled.div`
   display: flex;
   flex-direction: column;
 }`;
+
+const PrefsBar = Styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+`;
 
 const ZapFormSection = Styled.div`
   background: url(/images/bolts-pattern.png) repeat;

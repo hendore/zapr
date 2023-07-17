@@ -51,12 +51,14 @@ function ZapButton(props) {
     <ZapButtonContainer
       whileTap={{ scale: 0.9 }}
       onClick={props.onClick}
-      initial={{ opacity: 0, y: visible ? 0 : 100 }}
+      initial={{ y: visible ? 0 : 100, opacity: visible ? 1 : 0 }}
       animate={{
         y: visible ? 0 : 100,
         // scale: visible ? 1 : 0.8,
         opacity: visible ? 1 : 0,
       }}
+      style={{ pointerEvents: visible ? "auto" : "none" }}
+      disabled={props.amount <= 0}
     >
       <ZapButtonText sats={props.amount} />
     </ZapButtonContainer>

@@ -76,7 +76,6 @@ export default function ZapEvent(props) {
       sats: zapAmount,
       passphrase,
     });
-    alert(JSON.stringify(zapreq));
 
     return createAndOpenInvoice(recipient, zapAmount, zapreq);
   }

@@ -7,9 +7,6 @@
   "theme_color": "#000",
   "orientation": "portrait",
   "display": "standalone",
-  "launch_handler": {
-    "client_mode": "launch-existing"
-  },
   "icons": [
     {
       "src": "/favicon.png",

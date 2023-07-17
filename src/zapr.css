@@ -20,25 +20,32 @@
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
-    overscroll-behavior-y: none;
 }
 
 html,
 body {
     margin: 0;
     padding: 0;
-    line-height: 140%;
+    line-height: 145%;
     background-color: var(--color-background-0);
     color: var(--color-text);
     font-family: var(--font-serif);
+}
+
+p {
+    color: color-mix(in srgb, var(--color-text) 80%, transparent);
 }
 
 img {
     max-width: 100%;
 }
 
+#zapr {
+    min-height: -webkit-fill-available;
+}
+
 @keyframes scroll {
     to {
-      background-position: -500px 500px;
+        background-position: -500px 500px;
     }
-  }
+}

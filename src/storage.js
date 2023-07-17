@@ -1,4 +1,5 @@
 import localforage from "localforage";
+import CryptoJS from "crypto-js";
 
 // Development hack - when I just want to restart from fresh
 // localforage.dropInstance({ name: "zapper", storeName: "userdata" });
@@ -37,72 +38,44 @@ const defaultPreferences = {
 };
 
 /**
+ * Returns the users stored prefereneces (hardcoded for now, will allow them to be edited later)
  *
- *
- * @param String pk
  * @returns Promise
  */
-export function loadPreferences() {
-  return localforage.getItem("preferences").then((preferences) => {
-    return defaultPreferences;
-
-    // Uncomment below later when we can modify preferences
-    // return preferences || restoreDefaultPreferences();
+export function getUserPreference() {
+  return new Promise((resolve) => {
+    return resolve(defaultPreferences);
   });
 }
 
 /**
+ * Updates the users preferred signing method configuration.
  *
- *
- * @param String pk
+ * @param Object config
  * @returns Promise
  */
-export function restoreDefaultPreferences() {
-  return savePreferences(defaultPreferences).then(() => {
-    return defaultPreferences;
-  });
+export function saveEventSigningConfig(config) {
+  return localforage.setItem("signingconf", config);
 }
 
 /**
+ * Returns the users stored public key.
  *
- *
- * @param String pk
  * @returns Promise
  */
-export function savePreferences({ amounts, comment, relays, wallet }) {
-  return localforage.setItem("preferences", {
-    amounts,
-    comment,
-    relays,
-    wallet,
-  });
+export function getUsersPublicKey() {
+  return localforage.getItem("signingconf").then((config) => config.pubkey);
 }
 
 /**
- * Stores the users private key for use later.
+ * Returns the users stored private key decrypted with the given passphrase.
  *
- * @param String pk
+ * @param String passphrase
  * @returns Promise
  */
-export function savePrivateKey(pk) {
-  return localforage.setItem("privatekey", pk);
-}
-
-/**
- * Returns the users stored private key.
- *
- * @param String pk
- * @returns Promise
- */
-export function getPrivateKey() {
-  return localforage.getItem("privatekey");
-}
-
-/**
- * Removes any previously stored private key.
- *
- * @returns Promise
- */
-export function clearPrivateKey() {
-  return localforage.removeItem("privatekey");
+export function getUsersDecryptedPrivateKey(passphrase) {
+  return localforage
+    .getItem("signingconf")
+    .then((config) => CryptoJS.AES.decrypt(config.privkey, passphrase))
+    .then((decrypted) => decrypted.toString(CryptoJS.enc.Utf8));
 }

@@ -10,18 +10,17 @@ export default function Note(props) {
   return (
     <Container>
       <Metadata>
-        <Avatar src={props.author.profile.picture} />
+        <Avatar src={props.author["picture"]} />
         <div>
           <DisplayName>
-            {props.author.profile["name"].trim() ||
-              props.author.profile["display_name"].trim()}
+            {props.author["name"].trim() || props.author["display_name"].trim()}
           </DisplayName>
           <Timestamp>3h</Timestamp>
         </div>
       </Metadata>
       <Content>
-        {paragraphs.map((paragraph) => {
-          return <p>{paragraph}</p>;
+        {paragraphs.map((paragraph, linenum) => {
+          return <p key={linenum}>{paragraph}</p>;
         })}
       </Content>
     </Container>

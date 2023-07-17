@@ -30,11 +30,11 @@ export default function Preferences(props) {
       <Label>Lightning Wallet</Label>
       <Select value={wallet} onChange={(e) => setWallet(e.target.value)}>
         <option value="lightning:">System Default</option>
-        <option value="walletofsatoshi:lightning:">Wallet of Satoshi</option>
-        <option value="muun:">Muun</option>
-        <option value="zuesln:lightning:">Zues</option>
-        <option value="zebedee:lightning:">Zebedee</option>
         <option value="bluewallet:lightning">Blue Wallet</option>
+        <option value="muun:">Muun</option>
+        <option value="walletofsatoshi:lightning:">Wallet of Satoshi</option>
+        <option value="zeusln:lightning:">Zeus</option>
+        <option value="zebedee:lightning:">Zebedee</option>
       </Select>
       <Button onClick={handleClickSave}>Save Preferences</Button>
     </Container>
